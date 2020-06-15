@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Check that the game is up-to-date
 "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMDDIR}/steamcmd.sh" \
 		@ShutdownOnFailedCommand \
@@ -14,11 +16,12 @@ sed -i 's/name=.*/name="'"$BAR_NAME"'"/' "${SETTINGS_XML}"
 sed -i 's/public=.*/public="true"/' "${SETTINGS_XML}"
 
 # Creat client Persmissions
+CLIENT_PERMISSIONS_XML=${STEAMAPPDIR}/Data/clientpermissions.xml
 IFS=$","
 echo \
 '<?xml version="1.0" encoding="utf-8"?>
 <ClientPermissions>' \
-> clientpermissions.xml
+> $CLIENT_PERMISSIONS_XML
 
 for permission in $BAR_PERMISSIONS
 do
@@ -28,10 +31,10 @@ do
         name="'"${arr[0]}"'"
         steamid="'"${arr[1]}"'"
         preset="'"${arr[2]}"'" />' \
-    >> clientpermissions.xml
+    >> $CLIENT_PERMISSIONS_XML
 done
 
-echo '</ClientPermissions>' >> clientpermissions.xml
+echo '</ClientPermissions>' >> $CLIENT_PERMISSIONS_XML
 
 # Run the server!
 "${STEAMAPPDIR}/DedicatedServer"
