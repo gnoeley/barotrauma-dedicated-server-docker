@@ -9,6 +9,7 @@ Just run the command...
   docker run \
     --env BAR_PASSWORD=changeme! \
     --env BAR_NAME=ServerNameHere \
+    --env BAR_PERMISSIONS=InGameUsername:Steam64ID:preset,... \
     -p 27015:27015/udp \
     -p 27016:27016/udp \
     --label barotrauma-server \
