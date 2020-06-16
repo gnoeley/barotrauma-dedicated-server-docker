@@ -41,6 +41,12 @@ RUN set -x \
 	&& chown -R steam:steam /home/steam/.steam \
 	&& ln -s ${STEAMAPPDIR}/steamclient.so /home/steam/.steam/sdk64/steamclient.so
 
+# Create Multiplayer save directory for volume mount
+ENV BAR_MULTIPLAYER_SAVE_DIR "/home/steam/.local/share/Daedalic Entertainment GmbH/Barotrauma/Multiplayer"
+RUN set -x \
+  && mkdir -p "$BAR_MULTIPLAYER_SAVE_DIR" \
+  && chown -R steam:steam "$BAR_MULTIPLAYER_SAVE_DIR/../.."
+
 # Copy custom files for server
 COPY --chown=steam:steam entry.sh ${STEAMAPPDIR}/entry.sh
 RUN chmod 755 ${STEAMAPPDIR}/entry.sh
@@ -54,6 +60,7 @@ USER steam
 WORKDIR $STEAMAPPDIR
 
 VOLUME $STEAMAPPDIR
+VOLUME $BAR_MULTIPLAYER_SAVE_DIR
 
 ENTRYPOINT ${STEAMAPPDIR}/entry.sh
 

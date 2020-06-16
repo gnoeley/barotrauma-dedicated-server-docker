@@ -12,12 +12,24 @@ Just run the command...
     --env BAR_PERMISSIONS=InGameUsername:Steam64ID:preset,... \
     -p 27015:27015/udp \
     -p 27016:27016/udp \
+    -v submarines:/home/steam/barotrauma-dedicated/Submarines/github \
+    -v saves:"/home/steam/.local/share/Daedalic Entertainment GmbH/Barotrauma/Multiplayer" \
     --label barotrauma-server \
     goldfish92/barotrauma-dedicated-server
 ```
 
 Change the environment variables for password and server name to customize your server.
 
-# TODO
-- More serversettings.xml customization exposed as ENV variables.
-- Instructions for using volumes for persistent server state.
+# Subamarines
+Mount a volume when running the container to include additional custom submarines. For example
+```sh
+-v submarines:/home/steam/barotrauma-dedicated/Submarines/github
+```
+mounts the volume `submarines` on the host into the Barotrauma Submarine directory into a subdirectory called `github`.
+
+# Multiplayer Saves
+Mount a volume when running the container to persist multiplayer saves between container starts. For example
+```sh
+-v saves:"/home/steam/.local/share/Daedalic Entertainment GmbH/Barotrauma/Multiplayer"
+```
+mounts the volume `saves` on the host into the Barotrauma Multiplayer directory where saves are created. These save files can then be accessed on the host or mounted between container restarts.
