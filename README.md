@@ -14,7 +14,7 @@ Just run the command...
     -p 27016:27016/udp \
     -v submarines:/home/steam/barotrauma-dedicated/Submarines/github \
     -v saves:"/home/steam/.local/share/Daedalic Entertainment GmbH/Barotrauma/Multiplayer" \
-    --label barotrauma-server \
+    --name barotrauma-server \
     goldfish92/barotrauma-dedicated-server
 ```
 
