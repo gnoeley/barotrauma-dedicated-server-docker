@@ -17,7 +17,10 @@ sed -i 's/ServerMessage=.*/ServerMessage="'"$BAR_SERVERMESSAGE"'"/' "${SETTINGS_
 sed -i 's/public=.*/public="true"/' "${SETTINGS_XML}"
 
 
-# Creat client Persmissions
+# Create client Permissions
+# <Name>:<SteamID>:<Permissions>:<Commands>
+# <InGameName1>:<SteamID1>:<Permission1.1>,<Permission1.2>,<Permission1.3>:<Command1.1>,<Command1.2>;<InGameName2>:<SteamID2>:<Permission2.1>,<Permission2.2>:;<InGameName3>:<SteamID3>:<Permission3.1>:<Command3.1>,<Command3.2>;
+# Commands are optional
 CLIENT_PERMISSIONS_XML=${STEAMAPPDIR}/Data/clientpermissions.xml
 IFS=$";"
 echo \
