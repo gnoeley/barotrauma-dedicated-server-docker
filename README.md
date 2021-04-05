@@ -9,7 +9,8 @@ Just run the command...
   docker run \
     --env BAR_PASSWORD=changeme! \
     --env BAR_NAME=ServerNameHere \
-    --env BAR_PERMISSIONS=InGameUsername:Steam64ID:preset,... \
+    --env BAR_SERVERMESSAGE="Put ServerMessage here." \
+    --env BAR_PERMISSIONS=InGameUsername1:Steam64ID1:Perm1,Perm2:Command1,Command2;InGameUsername2:Steam64ID2:Perm2.1:InGameUsername3:Steam64ID3:Perm3.1:Command3.1,Command3.2,Command3.3 \
     -p 27015:27015/udp \
     -p 27016:27016/udp \
     -v submarines:/home/steam/barotrauma-dedicated/Submarines/github \
