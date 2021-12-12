@@ -37,7 +37,7 @@ The format of the variable value is as follows:
                         | <name> ":" <steam-id> ":" <permissions> ":" <commands> ";"
 
 <permissions> ::= <psermission> | <permission> "," <permissions>
-<permission ::= see https://barotraumagame.com/wiki/Permissions
+<permission> ::= see https://barotraumagame.com/wiki/Permissions
 
 <commands> ::= <command> | <command> "," <commands>
 <command> ::= see https://barotraumagame.com/wiki/Console_Commands
