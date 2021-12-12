@@ -28,7 +28,7 @@ InGameUsername2:SteamId2:Perm2.1\; \
 Change the environment variables for password and server name to customize your server.
 
 ## Permissions
-Server permissions are configured using the `BAR_PERMISSIONS` environment variable. The variable is processed by the `entry-point.sh` script on container start and produces a `clientpermissions.xml` file.
+Server permissions are configured using the `BAR_PERMISSIONS` environment variable. The variable is processed by the [`entry.sh`](https://github.com/gnoeley/barotrauma-dedicated-server-docker/blob/master/entry.sh#L21) script on container start and produces a `clientpermissions.xml` file.
 The format of the variable value is as follows:
 
 ```ebnf
