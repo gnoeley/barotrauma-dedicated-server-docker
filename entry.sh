@@ -21,7 +21,7 @@ sed -i 's/public=.*/public="true"/' "${SETTINGS_XML}"
 
 # Create client Permissions
 # <Name>:<SteamID>:<Permissions>:<Commands>
-# <InGameName1>:<SteamID1>:<Permission1.1>,<Permission1.2>,<Permission1.3>:<Command1.1>,<Command1.2>;<InGameName2>:<SteamID2>:<Permission2.1>,<Permission2.2>:;<InGameName3>:<SteamID3>:<Permission3.1>:<Command3.1>,<Command3.2>;
+# <InGameName1>:<SteamID1>:<Permission1.1>,<Permission1.2>,<Permission1.3>:<Command1.1>,<Command1.2>;<InGameName2>:<SteamID2>:<Permission2.1>,<Permission2.2>;<InGameName3>:<SteamID3>:<Permission3.1>:<Command3.1>,<Command3.2>;
 # Commands are optional
 CLIENT_PERMISSIONS_XML=${STEAMAPPDIR}/Data/clientpermissions.xml
 IFS=$";"
@@ -36,9 +36,7 @@ do
     arr=( $permission )
     cmdstr=${arr[3]}
     commands=""
-    clientend=""
     if [ ! -z "$cmdstr" ];then
-      clientend=">"
       IFS=","
       read -a cmdarr <<< "$cmdstr"
       for cmd in "${cmdarr[@]}"
@@ -49,7 +47,7 @@ do
     echo '<Client
         name="'"${arr[0]}"'"
         steamid="'"${arr[1]}"'"
-        permissions="'"${arr[2]}"'"'"${clientend}"'
+        permissions="'"${arr[2]}"'">
         '"${commands}"'
     </Client>' \
     >> $CLIENT_PERMISSIONS_XML
