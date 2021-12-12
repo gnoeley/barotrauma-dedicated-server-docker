@@ -1,5 +1,7 @@
 Barotrauma Dedicated Server (Docker)
 ------------------------------------
+[![dockeri.co](https://dockeri.co/image/goldfish92/barotrauma-dedicated-server)](https://hub.docker.com/r/goldfish92/barotrauma-dedicated-server)
+
 Docker container which runs a [Barotrauma](https://store.steampowered.com/app/602960/Barotrauma/) dedicated server using [SteamCMD](https://developer.valvesoftware.com/wiki/Command_Line_Options#SteamCMD).
 The server uses the default ports (27015/udp & 27016/udp) and is exposed as public by default.
 
