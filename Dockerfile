@@ -13,9 +13,7 @@ ENV STEAMAPPDIR /home/steam/barotrauma-dedicated
 # Remove packages and tidy up
 RUN set -x \
 	&& apt-get update \
-	&& apt-get install -y --no-install-recommends --no-install-suggests \
-		wget=1.20.1-1.1 \
-		ca-certificates=20190110 \
+	&& apt-get install -y wget \
   && wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
 	&& dpkg -i packages-microsoft-prod.deb \
 	&& apt-get update \
@@ -53,7 +51,10 @@ RUN chmod 755 ${STEAMAPPDIR}/entry.sh
 
 # Update these ENV values...
 ENV BAR_PASSWORD=changeme! \
-  BAR_NAME=UnnamedServer
+  BAR_NAME=UnnamedServer \
+  BAR_SERVERMESSAGE="" \
+  BAR_START_WHEN_CLIENTS_READY=True \
+  BAR_START_WHEN_CLIENTS_READY_RATIO=1.0
 
 USER steam
 
