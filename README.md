@@ -23,7 +23,7 @@ InGameUsername2:SteamId2:Perm2.1\; \
     -v submarines:/home/steam/barotrauma-dedicated/Submarines/github \
     -v saves:"/home/steam/.local/share/Daedalic Entertainment GmbH/Barotrauma/Multiplayer" \
     --name barotrauma-server \
-    goldfish92/barotrauma-dedicated-server
+    goldfish92/barotrauma-dedicated-server:1.2.0
 ```
 
 Change the environment variables for password and server name to customize your server.
