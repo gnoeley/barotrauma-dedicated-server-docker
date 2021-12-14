@@ -2,21 +2,21 @@
 
 # Check that the game is up-to-date
 "${STEAMCMDDIR}/steamcmd.sh" "${STEAMCMDDIR}/steamcmd.sh" \
-		@ShutdownOnFailedCommand \
-		@NoPromptForPassword \
-		+login anonymous \
-		+force_install_dir ${STEAMAPPDIR} \
-		+app_update ${STEAMAPPID} \
-		+'quit'
+    @ShutdownOnFailedCommand \
+    @NoPromptForPassword \
+    +login anonymous \
+    +force_install_dir ${STEAMAPPDIR} \
+    +app_update ${STEAMAPPID} \
+    +'quit'
 
 # Update settings.xml using ENV varaibles
 SETTINGS_XML=${STEAMAPPDIR}/serversettings.xml
-sed -i "s/password=.*/password=\"${BAR_PASSWORD}\"/" ${SETTINGS_XML}
-sed -i "s/name=.*/name=\"${BAR_NAME}\"/" ${SETTINGS_XML}
-sed -i "s/ServerMessage=.*/ServerMessage=\"${BAR_SERVERMESSAGE}\"/" ${SETTINGS_XML}
-sed -i "s/startwhenclientsready=.*/startwhenclientsready=\"${BAR_START_WHEN_CLIENTS_READY}\"/" ${SETTINGS_XML}
-sed -i "s/startwhenclientsreadyratio=.*/startwhenclientsreadyratio=\"${BAR_START_WHEN_CLIENTS_READY_RATIO}\"/" ${SETTINGS_XML}
-sed -i "s/public=.*/public=\"true\"/" ${SETTINGS_XML}
+sed -i "s/password=.*/password=\"${BAR_PASSWORD}\"/" "${SETTINGS_XML}"
+sed -i "s/name=.*/name=\"${BAR_NAME}\"/" "${SETTINGS_XML}"
+sed -i "s/ServerMessage=.*/ServerMessage=\"${BAR_SERVERMESSAGE}\"/" "${SETTINGS_XML}"
+sed -i "s/startwhenclientsready=.*/startwhenclientsready=\"${BAR_START_WHEN_CLIENTS_READY}\"/" "${SETTINGS_XML}"
+sed -i "s/startwhenclientsreadyratio=.*/startwhenclientsreadyratio=\"${BAR_START_WHEN_CLIENTS_READY_RATIO}\"/" "${SETTINGS_XML}"
+sed -i "s/public=.*/public=\"true\"/" "${SETTINGS_XML}"
 
 # Create client Permissions
 # <Name>:<SteamID>:<Permissions>:<Commands>
@@ -24,34 +24,31 @@ sed -i "s/public=.*/public=\"true\"/" ${SETTINGS_XML}
 # Commands are optional
 CLIENT_PERMISSIONS_XML=${STEAMAPPDIR}/Data/clientpermissions.xml
 echo \
-"<?xml version=\"1.0\" encoding=\"utf-8\"?>
+    "<?xml version=\"1.0\" encoding=\"utf-8\"?>
 <ClientPermissions>" \
-> $CLIENT_PERMISSIONS_XML
+    >"$CLIENT_PERMISSIONS_XML"
 
 IFS=$";"
-for client_permission in ${BAR_PERMISSIONS}
-do
+for client_permission in ${BAR_PERMISSIONS}; do
     IFS=$":"
-    client_permission_terms=( $client_permission )
+    client_permission_terms=($client_permission)
 
     name=${client_permission_terms[0]}
     steamid=${client_permission_terms[1]}
     permissions=${client_permission_terms[2]}
     commands=${client_permission_terms[3]}
 
-    echo "  <Client name=\"${name}\" steamid=\"${steamid}\" permissions=\"${permissions}\">" >> $CLIENT_PERMISSIONS_XML
+    echo "  <Client name=\"${name}\" steamid=\"${steamid}\" permissions=\"${permissions}\">" >>"$CLIENT_PERMISSIONS_XML"
 
     IFS=$","
-    for command in ${commands}
-    do
-      echo "    <command name=\"${command}\"/>" >> $CLIENT_PERMISSIONS_XML
+    for command in ${commands}; do
+        echo "    <command name=\"${command}\"/>" >>"$CLIENT_PERMISSIONS_XML"
     done
 
-    echo "  </Client>" >> $CLIENT_PERMISSIONS_XML
+    echo "  </Client>" >>"$CLIENT_PERMISSIONS_XML"
 done
 
-echo "</ClientPermissions>" >> $CLIENT_PERMISSIONS_XML
-
+echo "</ClientPermissions>" >>"$CLIENT_PERMISSIONS_XML"
 
 # Run the server!
-${STEAMAPPDIR}/DedicatedServer
+"${STEAMAPPDIR}"/DedicatedServer
